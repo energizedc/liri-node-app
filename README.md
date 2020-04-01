@@ -50,5 +50,12 @@ node liri.js concert-this _bandname_  |'bandname' is the band or artist to searc
 node liri.js movie-this _moviename_    | 'moviename' is the title of the movie you want info for  | OMDB
 node liri.js do-what-this-says  | This search reads file random.txt with a specific artist in it. If you want to change the default artist, open file and add new artist | Uses fs. node package.
 
+## View Command Search Results (examples)
+
 i.e., At the terminal command line enter:        
  *node liri.js concert-this Pink*   
+ 
+ Use this URL to view - https://github.com/energizedc/liri-node-app/blob/master/screen_shots_of_executing_cmds.docx
+ 
+ 
+Created by Donna Johnson
