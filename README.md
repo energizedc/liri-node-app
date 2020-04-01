@@ -45,7 +45,7 @@ SPOTIFY_SECRET=*put secred id here*
 At the terminal command line,  enter ** one ** of the following commands:
 Command for search             | Purpose    |App used for Search
 -------------------------------|-------------------------|--------------------------------
-node liri.js spotify-this-song _songtitle_  | 'songtitle' is the song you want to see info for|Spotify
+node liri.js spotify-this-song _songtitle_  | 'songtitle' can be the song title or artist name you want to see info for|Spotify
 node liri.js concert-this _bandname_  |'bandname' is the band or artist to search next concert info |Axios & rest.bandsintown
 node liri.js movie-this _moviename_    | 'moviename' is the title of the movie you want info for  | OMDB
 node liri.js do-what-this-says  | This search reads file random.txt with a specific artist in it. If you want to change the default artist, open file and add new artist | Uses fs. node package.
