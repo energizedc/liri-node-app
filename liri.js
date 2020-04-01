@@ -8,6 +8,7 @@ var moment  = require("moment");
 var fs      = require("fs");
 var axios   = require("axios")
 var omdb    = require("omdb");
+var colors  = require("colors");
 
 
 var spotify = new Spotify(keys.spotify);
@@ -47,7 +48,7 @@ console.log("i am at the beginning of switch");
 
     function concertThis(){
 
-        console.log( "i am in concerts");
+        console.log(colors.yellow.inverse ("The artist is   " + userInput));
 
     //    var queryUrl = "https://rest.bandsintown.com/artists/userInput/events?app_id=codingbootcamp";
 
@@ -56,13 +57,18 @@ console.log("i am at the beginning of switch");
         axios.get(queryUrl).then(
             function(response) {
                 if(response.data[0].venue !=  undefined) {
-                    console.log("Event Veunue: " + response.data[0].venue.name);
-                    console.log("Event Location: " + response.data[0].venue.city);
+                    console.log("    ");
+                    console.log(colors.blue.underline("The next scheduled concert is::"));
+                    console.log("    ");
+                    console.log(colors.blue.underline("Event Venue:        " + response.data[0].venue.name));
+                    console.log(colors.blue.underline("Event Location:      " + response.data[0].venue.city));
                     var eventDateTime = moment(response.data[0].datetime);
-                    console.log("Event Date & Time: " + eventDateTime.format("MM/DD/YYYY"));
+                    console.log(colors.blue.underline("Event Date & Time:   " + eventDateTime.format("MM/DD/YYYY")));
+                    console.log("    ");
+
                 }
                 else {
-                    console.log("No results found.");
+                    console.log(colors.red("No results found."));
                 }
             }
        )
@@ -86,29 +92,31 @@ console.log("i am at the beginning of switch");
         }
         console.log(error.config);
 }); 
-}     ///end MovieThis
+}     ///end concertThis
 /////////////////////////////////////////////////////////////   
 ////*****      SEARCHING FOR MOVIE TITLES          **********/
 /////////////////////////////////////////////////////////////
 
 function movieThis() {
 
-    console.log("i am in movies");
+    console.log(colors.inverse("Search Results for Movie Title     " + userInput));
 
     var queryUrl = "http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy";
 
     axios.get(queryUrl).then(
         function(response) {
             if (response.data.Title != undefined) {
-                console.log("Title: " + response.data.Title);
-                console.log("Year: " + response.data.Year);
-                console.log("imdbRating:: " + response.data.imdbRating);
-                console.log("Title: " + response.data.Title);
-                console.log("Country:: " + response.data.Country);
-                console.log("Language:: " + response.data.Language);
-                console.log("Plot: " + response.data.Plot);
-                console.log("Actors: " + response.data.Actors);
-                console.log("RottenTomatoes: " + response.data.tomatoRating);
+                console.log("    ");
+                console.log(colors.magenta.underline("Title:            " + response.data.Title));
+                console.log(colors.magenta.underline("Year:             " + response.data.Year));
+                console.log(colors.magenta.underline("imdbRating::      " + response.data.imdbRating));
+                console.log(colors.magenta.underline("Title:            " + response.data.Title));
+                console.log(colors.magenta.underline("Country::         " + response.data.Country));
+                console.log(colors.magenta.underline("Language::        " + response.data.Language));
+                console.log(colors.magenta.underline("Plot:             " + response.data.Plot));
+                console.log(colors.magenta.underline("Actors:           " + response.data.Actors));
+                console.log(colors.magenta.underline("RottenTomatoes:   " + response.data.tomatoRating));
+                console.log("    ");
             } 
             else {
                 movieThis("Mr. Nobody");
@@ -140,16 +148,20 @@ function movieThis() {
 ////*****      SEARCHING FOR SONG INFO                      *********/
 //////////////////////////////////////////////////////////////////////
 function songThis(userInput) {
+    console.log(colors.bgBrightRed("Spotify Song Search :      ".black  + userInput.black));
+
     spotify
     .search({ type: 'track', query: userInput })
     .then(function(response){
         if (response.tracks.total === 0) {
             errorConditionForSpotify();
         } else {
-            console.log("Artist: " + response.tracks.items[0].artists[0].name);
-            console.log("Track: " + response.tracks.items[0].name);
-            console.log("Preview URL: " + response.tracks.items[0].preview_url);
-            console.log("Album: " + response.tracks.items[0].album.name);
+            console.log("    ");
+            console.log(colors.green.underline("Artist:      " + response.tracks.items[0].artists[0].name));
+            console.log(colors.green.underline("Track:       " + response.tracks.items[0].name));
+            console.log(colors.green.underline("Preview URL: " + response.tracks.items[0].preview_url));
+            console.log(colors.green.underline("Album:       " + response.tracks.items[0].album.name));
+            console.log("    ");
         }
     }).catch(function (error) {  
         console.log(error);
@@ -162,10 +174,10 @@ function errorConditionForSpotify() {
     .then(function(response) {
         for (var i=0;i < response.tracks.items.length; i++) {
             if (response.tracks.items[i].artists[0].name === "Ace of Base") {
-                console.log("Artist: " + response.tracks.items[i].artists[0].name);
-                console.log("Track: " + response.tracks.items[i].name);
+                console.log("Artist:   " + response.tracks.items[i].artists[0].name);
+                console.log("Track:    " + response.tracks.items[i].name);
                 console.log("Preview URL: " + response.tracks.items[i].preview_url);
-                console.log("Album: " + response.tracks.items[i].album.name);
+                console.log("Album:    " + response.tracks.items[i].album.name);
                 i = response.tracks.items.length;
             }
         }
