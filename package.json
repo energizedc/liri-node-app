@@ -22,7 +22,7 @@
     "bandsintown": "^1.0.1",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "node-spotify-api": "^1.1.1",
     "omdb": "^0.8.0"
   }
